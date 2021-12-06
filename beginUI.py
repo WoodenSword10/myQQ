@@ -49,6 +49,9 @@ class Ui_dialog(object):
         self.pushButton = QtWidgets.QPushButton(self.widget)
         self.pushButton.setObjectName("pushButton")
         self.gridLayout.addWidget(self.pushButton, 3, 0, 1, 1)
+        self.pushButton_3 = QtWidgets.QPushButton(self.widget)
+        self.pushButton_3.setObjectName("pushButton")
+        self.gridLayout.addWidget(self.pushButton_3, 3, 4, 1, 1)
 
         self.retranslateUi(dialog)
         QtCore.QMetaObject.connectSlotsByName(dialog)
@@ -61,4 +64,5 @@ class Ui_dialog(object):
         self.pushButton_2.setText(_translate("dialog", "注册"))
         self.label.setText(_translate("dialog", "用户名"))
         self.pushButton.setText(_translate("dialog", "登录"))
+        self.pushButton_3.setText(_translate("dialog", "工具"))
 

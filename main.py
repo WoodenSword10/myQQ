@@ -1,10 +1,13 @@
 import sys
 import time
+import pyautogui
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from PyQt5.QtCore import pyqtSignal, Qt
 from beginUI import *
 from MyQQ import *
+import cutImage
+import pyscreenshot as ImageGrab
 
 class MyWindow(QMainWindow, Ui_dialog):
     # 用于窗口间消息传递
@@ -14,6 +17,7 @@ class MyWindow(QMainWindow, Ui_dialog):
         self.setupUi(self)
         self.pushButton.clicked.connect(self.login)
         self.pushButton_2.clicked.connect(self.register)
+        self.pushButton_3.clicked.connect(self.tools)
 
     def login(self):
         '''
@@ -61,6 +65,8 @@ class MyWindow(QMainWindow, Ui_dialog):
             box.setText("账号或密码错误！！！")
             box.exec_()
 
+    def tools(self):
+        cut_Image.show()
 
 
 
@@ -81,6 +87,17 @@ class MyQQ(QMainWindow, Ui_Form):
     def getDialogSignal(self, connect):
         self.label.setText(connect)
 
+class CutImage(QMainWindow, cutImage.Ui_Form):
+    def __init__(self, parent=None):
+        super(CutImage, self).__init__(parent)
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.cut)
+
+    def cut(self):
+        im = ImageGrab.grab()
+        im.save("./lj.jpg")
+        im.close()
+
 if __name__ == '__main__':
     # 实现不同分辨率下的电脑上的相同显示
     QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
@@ -88,4 +105,5 @@ if __name__ == '__main__':
     myWin = MyWindow()
     myWin.show()
     myQQ = MyQQ()
+    cut_Image = CutImage()
     sys.exit(app.exec_())
