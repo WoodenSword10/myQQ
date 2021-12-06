@@ -2,7 +2,7 @@ import sys
 import time
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, Qt
 from beginUI import *
 from MyQQ import *
 
@@ -53,9 +53,9 @@ class MyWindow(QMainWindow, Ui_dialog):
             self.mySignal.emit(username)
             myWin.close()
             box.setText("注册成功！！")
+            box.setStandardButtons(QMessageBox.Ok)  # QMessageBox显示的按钮
+            box.button(QMessageBox.Ok).animateClick(1000)  # t时间后自动关闭(t单位为毫秒)
             box.exec_()
-            time.sleep(1)
-            box.close()
             myQQ.show()
         else:
             box.setText("账号或密码错误！！！")
@@ -82,6 +82,8 @@ class MyQQ(QMainWindow, Ui_Form):
         self.label.setText(connect)
 
 if __name__ == '__main__':
+    # 实现不同分辨率下的电脑上的相同显示
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     myWin = MyWindow()
     myWin.show()
